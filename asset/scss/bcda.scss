@@ -18,11 +18,36 @@ $topbar-background: transparent;
 
 // Header
 
-#global-topbar {
+header {
+  position: relative;
+  margin: 0 #{-1 * $global-margin};
+}
+
+#global-topbar,
+.global-topbar-mobile {
   background-color: $dark-gray;
 }
 
-#global-topbar a {
+.global-topbar-mobile li {
+  width: 100%;
+}
+
+#global-topbar a,
+.global-topbar-mobile a {
+  color: #fff;
+}
+
+.title-bar.mobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  bottom: 0;
+  display: flex;
+}
+
+.title-bar.mobile .menu-toggle {
+  background-color: $dark-gray;
   color: #fff;
 }
 
@@ -42,6 +67,12 @@ body.dropdown-menu .banner.contained {
   }
 }
 
+@include breakpoint(medium down) {
+  body.dropdown-menu .banner.contained {
+    max-height: 8em;
+  }
+}
+
 .title-bar {
   padding: $global-padding;
 }
@@ -58,6 +89,12 @@ body.dropdown-menu .banner.contained {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+@include breakpoint(medium down) {
+  .title-bar.desktop .site-title {
+    padding-right: 5 * $global-padding;
+  }
 }
 
 .title-bar.desktop .site-title a {
@@ -95,10 +132,45 @@ body.dropdown-menu .banner.contained {
 
 // Page Blocks
 
+.page-layout-normal .featured.block-layout-alignment-right, 
+.page-layout-normal .featured.block-layout-alignment-left {
+  overflow: visible;
+}
+
 .page-title {
   font-size: 24px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.featured .assets .asset {
+  position: relative;
+  display: inline-block;
+  padding: 0 2rem 2rem;
+}
+
+.featured .asset img {
+  box-shadow: 0 10px 7px rgba(0,0,0,.4);
+}
+
+.featured .asset:after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  height: 4.5rem;
+  width: 100%;
+  background-image: url(../img/featured-shape.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+@include breakpoint(small down) {
+  .featured .asset:after {
+    height: 2rem;
+    bottom: 1rem;
+  }
 }
 
 // Faceted Browse
